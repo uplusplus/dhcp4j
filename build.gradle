@@ -6,10 +6,35 @@ buildscript {
 		// jcenter()
 		// maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
 		gradlePluginPortal()
+		maven{ url 'https://maven.aliyun.com/repository/google' }
+		maven{ url 'https://maven.aliyun.com/repository/public' }
+		maven{ url 'https://maven.aliyun.com/repository/jcenter'}
+		maven{ url 'https://maven.aliyun.com/repository/apache-snapshots' }
 	}
 
 	dependencies {
 		classpath 'org.anarres.gradle:gradle-stdproject-plugin:1.0.10'
+	}
+}
+
+allprojects {
+	repositories {
+		// mavenLocal()
+		mavenCentral()
+		// jcenter()
+		// maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+		gradlePluginPortal()
+		maven{ url 'https://maven.aliyun.com/repository/google' }
+		maven{ url 'https://maven.aliyun.com/repository/public' }
+		maven{ url 'https://maven.aliyun.com/repository/jcenter'}
+		maven{ url 'https://maven.aliyun.com/repository/apache-snapshots' }
+	}
+
+	tasks.withType(Javadoc) {
+		failOnError false
+		options.addStringOption('Xdoclint:none', '-quiet')
+		options.addStringOption('encoding', 'UTF-8')
+		options.addStringOption('charSet', 'UTF-8')
 	}
 }
 
@@ -44,6 +69,9 @@ subprojects {
 	dependencies {
 		compile 'com.google.code.findbugs:annotations:3.0.1'
 		compile 'org.slf4j:slf4j-api:1.7.12'
+		implementation 'com.android.support:support-annotations:21.0.2'
+		implementation 'javax.annotation:javax.annotation-api:1.2'
+		implementation "org.projectlombok:lombok:1.18.12"
 	}
 
 	sourceCompatibility = 1.7
@@ -66,6 +94,10 @@ project(':dhcp-server-mina') {
 	dependencies {
 		compile project(':dhcp-protocol')
 		compile 'org.apache.mina:mina-core:2.0.8'
+		compile 'com.android.support:support-annotations:21.0.2'
+		implementation 'javax.annotation:javax.annotation-api:1.2'
+		implementation "org.projectlombok:lombok:1.18.12"
+//		annotationProcessor('org.projectlombok:lombok')
 
 		testCompile project(':dhcp-protocol').sourceSets.test.output
 	}
@@ -75,6 +107,10 @@ project(':dhcp-server-netty') {
 	dependencies {
 		compile project(':dhcp-protocol')
 		compile 'io.netty:netty-all:4.0.23.Final'
+
+		compile 'com.android.support:support-annotations:21.0.2'
+		implementation 'javax.annotation:javax.annotation-api:1.2'
+		implementation "org.projectlombok:lombok:1.18.12"
 
 		testCompile project(':dhcp-protocol').sourceSets.test.output
 	}

@@ -34,7 +34,9 @@ public enum MessageType {
     DHCPACK((byte) 5, "DHCP Acknowledge"),
     DHCPNAK((byte) 6, "DHCP Not Acknowledge"),
     DHCPRELEASE((byte) 7, "DHCP Release"),
-    DHCPINFORM((byte) 8, "DHCP Inform");
+    DHCPINFORM((byte) 8, "DHCP Inform"),
+    DHCPFORCERENEW((byte) 9, "DHCP Force renew");
+
     private final String name;
     private final byte ordinal;
 
